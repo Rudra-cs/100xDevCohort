@@ -1,7 +1,8 @@
 /*
  * Write 3 different functions that return promises that resolve after 1, 2, and 3 seconds respectively.
- * Write a function that uses the 3 functions to wait for all 3 promises to resolve using Promise.all,
- * Print how long it took for all 3 promises to resolve.
+ * Write a function that sequentially calls all 3 of these functions in order.
+ * Print out the time it takes to complete the entire operation.
+ * Compare it with the results from 3-promise-all.js
  */
 
 function waitOneSecond() {
@@ -28,18 +29,14 @@ function waitThreeSecond() {
   });
 }
 
-function calculateTime() {
+async function calculateTime() {
   const startTime = Date.now();
-  Promise.all([waitOneSecond(), waitTwoSecond(), waitThreeSecond()])
-    .then((results) => {
-      const endTime = Date.now();
-      const duration = (endTime - startTime) / 1000; // Convert to seconds
-      console.log("All promises resolved in", duration, "seconds");
-      console.log("Results:", results);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  await waitOneSecond();
+  await waitTwoSecond();
+  await waitThreeSecond();
+  const endTime = Date.now();
+  const duration = (endTime - startTime) / 1000; // Convert to seconds
+  console.log("Sequentially resolved in", duration, "seconds");
 }
 
 // Call the calculateTime function to initiate the process
