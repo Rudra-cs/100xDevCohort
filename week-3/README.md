@@ -9,9 +9,7 @@ DOM
 ## Table Of Contents
 
 - [Arrow fns vs Callbacks](#arrow-fns-vs-callbacks)
-- [Request Methods](#request-methods)
-- [Express Query Params](#express-reqparams-reqquery-and-reqbody)
-- [HTTP Status Code](#http-status-code)
+- [CORS](#cors)
 
 ### Arrow fns vs Callbacks
 
@@ -77,4 +75,30 @@ app.get("/todos", (req, res) => {
 
 ```sh
 chrome --disable-web-security --user-data-dir
+```
+
+### Reconcilation in JS
+
+> In JavaScript, reconciliation usually refers to a process commonly associated with front-end web development libraries and frameworks, particularly React.
+
+- React, a popular JavaScript library for building user interfaces, uses a virtual DOM (Document Object Model) and a process called reconciliation to efficiently update the actual DOM when the state of a component changes. Reconciliation is the process of determining the differences between the current virtual DOM and the previous virtual DOM, and then applying the necessary updates to the actual DOM to reflect those changes.
+
+Here's how the reconciliation process works in React:
+
+1.  Render Virtual DOM: When you create a React component, it returns a virtual DOM representation of the UI based on the component's state and props.
+
+2.  Diffing: React performs a diffing (or reconciliation) process by comparing the new virtual DOM with the previous virtual DOM. It identifies the differences between the two trees. This process is often called "virtual DOM diffing" or "reconciliation algorithm."
+
+3.  Updating the DOM: After identifying the differences (the "diffs"), React applies the necessary updates to the actual DOM to reflect the changes. React tries to minimize the number of real DOM manipulations by batching and optimizing updates.
+
+        The goal of reconciliation is to make updates to the DOM as efficient as possible by only updating the parts of the DOM that have changed. This is important for performance because directly manipulating the DOM can be slow and costly. By using a virtual DOM and reconciliation, React minimizes the number of changes to the real DOM, resulting in faster and more efficient updates.
+
+```js
+// Initial render
+const element = <div>Hello, world!</div>;
+ReactDOM.render(element, document.getElementById("root"));
+
+// Update the content
+const updatedElement = <div>Hello, React!</div>;
+ReactDOM.render(updatedElement, document.getElementById("root"));
 ```
