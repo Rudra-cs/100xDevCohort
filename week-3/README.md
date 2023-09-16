@@ -1,5 +1,7 @@
 <h1 style="color:yellow"><center> Databases, Storage and basic Frontend 🧾</center></h1>
 
+Note: Read about Object.assign()
+
 ## Table Of Contents
 
 - [Arrow fns vs Callbacks](#arrow-fns-vs-callbacks)
@@ -40,6 +42,8 @@ app.get("/todos", (req, res) => {
 });
 ```
 
+**[⬆ Back to Top](#table-of-contents)**
+
 ### CORS:-
 
 > Cross-Origin Resource Sharing (CORS) is a mechanism which aims to allow requests made on behalf of you and at the same time block some requests made by rogue JS and is triggered whenever you are making an HTTP request to:
@@ -78,6 +82,8 @@ app.get("/todos", (req, res) => {
 chrome --disable-web-security --user-data-dir
 ```
 
+**[⬆ Back to Top](#table-of-contents)**
+
 ### Reconcilation in JS
 
 > In JavaScript, reconciliation usually refers to a process commonly associated with front-end web development libraries and frameworks, particularly React.
@@ -103,6 +109,8 @@ ReactDOM.render(element, document.getElementById("root"));
 const updatedElement = <div>Hello, React!</div>;
 ReactDOM.render(updatedElement, document.getElementById("root"));
 ```
+
+**[⬆ Back to Top](#table-of-contents)**
 
 ### **What is JSON Web Token?**
 
@@ -252,6 +260,8 @@ app.listen(port, () => {
 - Test your authentication by registering users, logging in, and accessing protected routes with valid tokens.
 - Remember to replace **'your-secret-key'** with a strong and secure secret key in production. Additionally, consider using environmental variables to store sensitive information like secret keys and database connection strings.
 
+**[⬆ Back to Top](#table-of-contents)**
+
 ### Difference between Hashing and Encryption:
 
 #### Encryption:
@@ -307,6 +317,8 @@ console.log("Hashed:", hashedData);
 
 ---
 
+**[⬆ Back to Top](#table-of-contents)**
+
 ### **_Types of Databases:_** -
 
 ---
@@ -319,6 +331,8 @@ console.log("Hashed:", hashedData);
 | In-Memory Databases          | Redis, Memcached, Apache Ignite                 | Data in memory               | Key-value, document, or others               | Key-based operations                | Consistent (varies)           | High-speed data access, limited by memory size | Caching, real-time analytics, low-latency data access                  |
 | Graph Databases              | Neo4j, Amazon Neptune                           | Nodes and edges in a graph   | Modeling and querying relationships          | Graph query languages like Cypher   | Consistent (varies)           | Horizontal scaling (varies)                    | Social networks, recommendation engines, complex relationship modeling |
 | Time-Series Databases        | InfluxDB, Prometheus                            | Time-series data             | Timestamps and tags/labels                   | Often have their query languages    | Consistent (varies)           | Scalable for time-series data                  | Monitoring, IoT, tracking data over time                               |
+
+**[⬆ Back to Top](#table-of-contents)**
 
 ### **MongoDB and Mongoose(ODM)**
 
@@ -420,5 +434,7 @@ BlogPost.findOne({ title: "My First Blog Post" }, (err, post) => {
   }
 });
 ```
+
+**[⬆ Back to Top](#table-of-contents)**
 
 Give yourself a praise for this.
