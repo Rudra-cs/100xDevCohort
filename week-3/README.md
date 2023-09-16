@@ -1,15 +1,16 @@
 <h1 style="color:yellow"><center> Databases, Storage and basic Frontend 🧾</center></h1>
 
-foundation for databases
-connecting frontend to backend
-AJAX
-cors
-DOM
-
 ## Table Of Contents
 
 - [Arrow fns vs Callbacks](#arrow-fns-vs-callbacks)
 - [CORS](#cors)
+- [Reconcilation in JS](#reconcilation-in-js)
+- [JSON WebToken](#what-is-json-web-token)
+- [Steps to Setup JWT Token Auth](#steps-to-setup-jwt-token-auth-in-nodejs-and-express)
+- [Encryption vs Hashing](#difference-between-hashing-and-encryption)
+- [Types of Databases](#types-of-databases)
+- [MongoDB and Mongoose](#mongodb-and-mongooseodm)
+- [Setting up MongoDB in Node.js and Express.js](#setting-up-mongoose-in-nodejs-and-express)
 
 ### Arrow fns vs Callbacks
 
@@ -102,3 +103,322 @@ ReactDOM.render(element, document.getElementById("root"));
 const updatedElement = <div>Hello, React!</div>;
 ReactDOM.render(updatedElement, document.getElementById("root"));
 ```
+
+### **What is JSON Web Token?**
+
+> JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret (with the HMAC algorithm) or a public/private key pair using RSA or ECDSA.
+
+#### **When should you use JSON Web Tokens?**
+
+    1. Authorization: This is the most common scenario for using JWT. Once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with that token. Single Sign On is a feature that widely uses JWT nowadays, because of its small overhead and its ability to be easily used across different domains.
+
+    2. Information Exchange: JSON Web Tokens are a good way of securely transmitting information between parties. Because JWTs can be signed—for example, using public/private key pairs—you can be sure the senders are who they say they are. Additionally, as the signature is calculated using the header and the payload, you can also verify that the content hasn't been tampered with.
+
+#### **What is the JSON Web Token structure?**
+
+- In its compact form, JSON Web Tokens consist of three parts separated by dots (.), which are:
+
+  - Header
+  - Payload
+  - Signature
+
+Therefore, a JWT typically looks like the following.
+
+```
+xxxxx.yyyyy.zzzzz
+```
+
+#### **Header**
+
+- The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
+  For Example: -
+
+```js
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+// Then, this JSON is Base64Url encoded to form the first part of the JWT.
+```
+
+#### **Payload**
+
+- The second part of the token is the payload, which contains the claims. Claims are statements about an entity (typically, the user) and additional data. There are three types of claims: registered, public, and private claims.
+
+#### **Signature**
+
+- To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
+
+### Steps to setup JWT Token Auth in Node.js and Express
+
+1. Install the dependencies for your application
+
+```js
+npm install express jsonwebtoken body-parser
+```
+
+2. Set Up Your Express Application:
+
+```js
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+
+app.use(bodyParser.json());
+```
+
+3. Create User Model:
+
+```js
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+});
+
+const User = mongoose.model("User", userSchema);
+```
+
+4. User Registration and Login:
+
+```js
+// Register route
+app.post("/register", async (req, res) => {
+  // Handle user registration and password hashing
+  // Save user data to the database
+});
+
+// Login route
+app.post("/login", async (req, res) => {
+  // Handle user login and JWT token creation
+});
+```
+
+5. Generate JWT Tokens:
+
+```js
+const jwt = require("jsonwebtoken");
+const secretKey = "your-secret-key"; // Replace with a secure secret key
+
+// Function to generate a JWT token
+function generateToken(user) {
+  const payload = {
+    userId: user._id,
+    username: user.username,
+  };
+  const options = {
+    expiresIn: "1h", // Token expiration time
+  };
+  return jwt.sign(payload, secretKey, options);
+}
+```
+
+6. Middleware for Authentication:
+
+```js
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+
+app.use(bodyParser.json());
+```
+
+7. Protect Routes:
+
+```js
+app.get("/protected", authenticateToken, (req, res) => {
+  // This route is protected and can only be accessed with a valid JWT token
+  res.json({ message: "Protected route accessed successfully." });
+});
+```
+
+8. Start the Server:
+
+```js
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+});
+```
+
+9. Testing:
+
+- Test your authentication by registering users, logging in, and accessing protected routes with valid tokens.
+- Remember to replace **'your-secret-key'** with a strong and secure secret key in production. Additionally, consider using environmental variables to store sensitive information like secret keys and database connection strings.
+
+### Difference between Hashing and Encryption:
+
+#### Encryption:
+
+```js
+const crypto = require("crypto");
+const algorithm = "aes-256-cbc"; // Encryption algorithm
+const secretKey = "supersecretkey"; // Encryption key
+
+// Text to be encrypted
+const plaintext = "Hello, World!";
+
+// Create an encryption cipher
+const cipher = crypto.createCipher(algorithm, secretKey);
+
+// Encrypt the plaintext
+let encryptedText = cipher.update(plaintext, "utf-8", "hex");
+encryptedText += cipher.final("hex");
+
+console.log("Encrypted:", encryptedText);
+
+// Decryption
+const decipher = crypto.createDecipher(algorithm, secretKey);
+let decryptedText = decipher.update(encryptedText, "hex", "utf-8");
+decryptedText += decipher.final("utf-8");
+
+console.log("Decrypted:", decryptedText);
+```
+
+```js
+const crypto = require("crypto");
+
+// Data to be hashed
+const dataToHash = "Hello, World!";
+
+// Create a hash using SHA-256
+const hash = crypto.createHash("sha256");
+
+// Update the hash with data
+hash.update(dataToHash);
+
+// Get the hexadecimal representation of the hash
+const hashedData = hash.digest("hex");
+
+console.log("Hashed:", hashedData);
+
+// Hashing is not reversible; you cannot obtain the original data from the hash
+```
+
+> **NOTE:** - In the code for encryption, we use an encryption algorithm and a secret key to encrypt and decrypt data. It's a reversible process, meaning you can recover the original data with the decryption key.
+
+> **NOTE:** - In the code for hashing, we use a hashing algorithm (SHA-256 in this case) to create a fixed-size hash value from the input data. Hashing is a one-way process; you cannot reverse it to obtain the original data. It's commonly used for password storage and data integrity verification.
+
+---
+
+### **_Types of Databases:_** -
+
+---
+
+| Database Type                | Examples                                        | Structure                    | Data Model                                   | Query Language                      | Consistency                   | Scalability                                    | Use Cases                                                              |
+| ---------------------------- | ----------------------------------------------- | ---------------------------- | -------------------------------------------- | ----------------------------------- | ----------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------- |
+| Relational Databases (RDBMS) | MySQL, PostgreSQL, Oracle, Microsoft SQL Server | Tables with rows and columns | Structured schema with predefined data types | SQL (Structured Query Language)     | ACID Transactions             | Vertical and some horizontal scaling           | Business applications, relational data modeling                        |
+| NoSQL Databases              | MongoDB, Cassandra, Couchbase, Redis            | Various data models          | Schema-less or flexible schema               | Specialized query languages or APIs | Eventual Consistency (varies) | Horizontal scaling; distributed systems        | Unstructured/semi-structured data, real-time apps, rapid scaling       |
+| Columnar Databases           | Amazon Redshift, Google BigQuery                | Column storage               | Tabular structure for data warehousing       | SQL for analytical queries          | Consistent (varies)           | Horizontal scaling and parallel processing     | Data warehousing, OLAP, business intelligence                          |
+| In-Memory Databases          | Redis, Memcached, Apache Ignite                 | Data in memory               | Key-value, document, or others               | Key-based operations                | Consistent (varies)           | High-speed data access, limited by memory size | Caching, real-time analytics, low-latency data access                  |
+| Graph Databases              | Neo4j, Amazon Neptune                           | Nodes and edges in a graph   | Modeling and querying relationships          | Graph query languages like Cypher   | Consistent (varies)           | Horizontal scaling (varies)                    | Social networks, recommendation engines, complex relationship modeling |
+| Time-Series Databases        | InfluxDB, Prometheus                            | Time-series data             | Timestamps and tags/labels                   | Often have their query languages    | Consistent (varies)           | Scalable for time-series data                  | Monitoring, IoT, tracking data over time                               |
+
+### **MongoDB and Mongoose(ODM)**
+
+> MongoDB is a popular NoSQL database that uses a flexible, schema-less document model. It's often used in modern web development due to its scalability and ease of use. Mongoose is an Object Data Modeling (ODM) library for MongoDB in Node.js, which provides a higher-level, schema-based abstraction for interacting with MongoDB.
+
+#### MongoDB Concepts: -
+
+- **Collections**: In MongoDB, data is organized into collections. A collection is a group of MongoDB documents. It's roughly equivalent to a table in a relational database.
+
+- **Documents**: Documents are individual records or data entries within a collection. They are stored in BSON (Binary JSON) format, which is a JSON-like binary representation. Documents in a collection can have different structures.
+
+#### **Mongoose:** -
+
+- Object Data Modeling (ODM):-
+
+      Mongoose is an ODM library that allows you to define schemas and models for your MongoDB data. It provides an abstraction layer over MongoDB, making it easier to work with data in a structured manner.
+
+### **Setting Up Mongoose in Node.js and Express:**
+
+1. **Install Mongoose:**
+
+```js
+npm install mongoose
+```
+
+2. **Create a Connection:**
+
+```js
+const mongoose = require("mongoose");
+
+// Connect to the MongoDB database
+mongoose.connect("mongodb://localhost/mydatabase", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Handle connection events
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "Connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
+});
+```
+
+> Replace 'mongodb://localhost/mydatabase' with the URL of your MongoDB server. The useNewUrlParser and useUnifiedTopology options are recommended to avoid deprecation warnings.
+
+3. **Define a Schema:**
+
+```js
+const mongoose = require("mongoose");
+
+const blogPostSchema = new mongoose.Schema({
+  title: String,
+  content: String,
+  author: String,
+  date: { type: Date, default: Date.now },
+});
+
+// Create a model from the schema
+const BlogPost = mongoose.model("BlogPost", blogPostSchema);
+```
+
+4. **Create and Save Documents:**
+
+```js
+const newPost = new BlogPost({
+  title: "My First Blog Post",
+  content: "This is the content of my blog post.",
+  author: "John Doe",
+});
+
+newPost.save((err, savedPost) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log("Blog post saved:", savedPost);
+  }
+});
+```
+
+5. **Query the Database:**
+
+```js
+// Find all blog posts
+BlogPost.find({}, (err, posts) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log("All blog posts:", posts);
+  }
+});
+
+// Find a blog post by title
+BlogPost.findOne({ title: "My First Blog Post" }, (err, post) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log("Found blog post:", post);
+  }
+});
+```
+
+Give yourself a praise for this.
