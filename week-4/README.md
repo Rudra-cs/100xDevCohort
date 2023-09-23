@@ -4,9 +4,6 @@
 
 - []()
 
-virtual dom
-state and components
-
 ### Virtual DOM
 
 > Virtual Document Object Model is a concept used in web development frameworks like React to improve the performance of updating and rendering user interfaces. It's a virtual representation of the actual DOM in memory, and it allows developers to make changes to the virtual DOM, which are then efficiently batched and applied to the real DOM, minimizing expensive and often slow DOM manipulations.
