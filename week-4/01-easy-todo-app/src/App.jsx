@@ -5,7 +5,6 @@ import ListTodo from "./components/ListTodo";
 const App = () => {
   return (
     <>
-      <h2>Todo App</h2>
       <InsertTodo />
       <ListTodo />
       <Footer />

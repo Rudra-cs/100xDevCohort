@@ -1,10 +1,10 @@
 const ListTodo = () => {
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <h3>Todo List</h3>
-      <div id="card">
-        <p>Todo Title</p>
-        <p>Todo Desc</p>
+      <div className="div">
+        <p style={{ display: "inline" }}>todo</p>
+        <input style={{ display: "inline" }} type="button" value="Delete" />
       </div>
     </div>
   );
