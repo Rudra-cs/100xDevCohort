@@ -41,13 +41,15 @@
  */
 
 const bodyParser = require("body-parser");
-const { error } = require("console");
 const express = require("express");
 const fs = require("fs");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 
 function findIndex(arr, id) {
   for (let i = 0; i < arr.length; i++) {
@@ -87,7 +89,7 @@ app.get("/todos/:id", (req, res) => {
 });
 
 app.post("/todos", (req, res) => {
-  const todo = {
+  const newTodo = {
     id: Math.floor(Math.random() * 1000000),
     title: req.body.title,
     description: req.body.description,
@@ -130,7 +132,7 @@ app.put("/todos/:id", (req, res) => {
 app.delete("/todos/:id", (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
-    const todos = JSON.parse(data);
+    let todos = JSON.parse(data);
     const todoIndex = findIndex(todos, parseInt(req.params.id));
     if (todoIndex === -1) {
       res.status(404).send();
@@ -149,4 +151,6 @@ app.use((req, res, next) => {
   res.status(404).send();
 });
 
-module.exports = app;
+app.listen(3000, () => {
+  console.log("Running on port 3000");
+});

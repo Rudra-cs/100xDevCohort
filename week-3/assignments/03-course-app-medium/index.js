@@ -1,22 +1,38 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const fs = require("fs");
+const jwt = require("jsonwebtoken");
 
 app.use(express.json());
+app.use(cors());
 
 let ADMINS = [];
 let USERS = [];
 let COURSES = [];
 
 // Read data from file, or initialize to empty array if file does not exist
-try {
-  ADMINS = JSON.parse(fs.readFileSync("admins.json", "utf8"));
-  USERS = JSON.parse(fs.readFileSync("users.json", "utf8"));
-  COURSES = JSON.parse(fs.readFileSync("courses.json", "utf8"));
-} catch {
-  ADMINS = [];
-  USERS = [];
-  COURSES = [];
+// Function to read and parse a JSON file
+function readAndParseJSON(filePath, targetVariable) {
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+
+    // Check if the file is empty
+    if (data.trim() === "") {
+      console.warn(`${filePath} is empty.`);
+    } else {
+      targetVariable = JSON.parse(data);
+    }
+  } catch (error) {
+    console.error(`Error reading or parsing ${filePath}:`, error.message);
+  }
+
+  return targetVariable;
 }
+
+ADMINS = readAndParseJSON("./admins.json", ADMINS);
+USERS = readAndParseJSON("users.json", USERS);
+COURSES = readAndParseJSON("courses.json", COURSES);
 
 const SECRET = "my-secret-key";
 
@@ -60,6 +76,7 @@ app.post("/admin/login", (req, res) => {
   const admin = ADMINS.find(
     (a) => a.username === username && a.password === password
   );
+  console.log(admin);
   if (admin) {
     const token = jwt.sign(
       {

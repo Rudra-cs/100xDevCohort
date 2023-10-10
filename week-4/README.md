@@ -2,7 +2,28 @@
 
 ## Table Of Contents
 
-- []()
+- [**Virtual DOM**](#virtual-dom)
+- [**Components and State**](#components-and-state)
+  - [**Components**](#components)
+  - [**State**](#state)
+
+* [**Props**:](#props) + [**How to pass data from child to parent in react?**](#how-to-pass-data-from-child-to-parent-in-react)
+  - [**children prop :**](#children-prop-)
+  - [**Array Rendering methods**](#array-rendering-methods)
+    - [**Using `map` to Render an Array**:](#using-map-to-render-an-array)
+    - [**Using filter to Filter an Array**:](#using-filter-to-filter-an-array)
+  - [**Renders(setInterval example)**:](#renderssetinterval-example)
+* [**React Hooks**](#react-hooks)
+  - [**useState**:](#usestate)
+  - [**useEffect**](#useeffect)
+  - [**useContext**](#usecontext)
+  - [**useReducer**](#usereducer)
+  - [**useCallback**](#usecallback)
+  - [**useMemo**](#usememo)
+  - [**useRef**](#useref)
+  - [**useImperativeHandle**](#useimperativehandle)
+
+- [**Custom Hooks**](#custom-hooks)
 
 ### Virtual DOM
 
