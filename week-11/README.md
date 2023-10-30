@@ -29,3 +29,21 @@ Key characteristics and benefits of a monorepo include:
 8. Enhanced Collaboration: Developers can easily collaborate on different parts of the system in the same repository, leading to better communication and shared knowledge.
 
 9. Performance: Monorepos can provide performance benefits by reducing the need to clone and manage multiple repositories on local development machines.
+
+- Checkpoint a mono repo in next.js + ts
+- Mono repo in Nextjs
+- Marination
+- Building an end to end mono repo in NextJS + TS
+
+- Steps to follow
+  - Init a turbo mono repo(npx create-turbo@latest )
+  - add a nextjs app with the page route in TS
+  - Update next.config.js to use ui as an internal package
+  - Export right set of commponents from ui
+  - Install mui(react dependency will complain) -- an opportunity for an open source contribution
+  - Put a simple signup/signin component (npm i from top)
+  - Start adding backend, create a new db module(internal?)
+  - Where should db.connect be? Cache it in a file of its own
+  - Connect frontend to backend(notice no cors?)
+  - Introduce store as a new module, transpile it
+  - Introduce components folder for appbar
