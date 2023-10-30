@@ -1,4 +1,4 @@
-<h1 style="color:yellow"><center>Custom Hooks, Generics and zod 🧾</center></h1>
+<h1 style="color:yellow"><center>Custom Hooks, Generics and zod || Monorepos and Publishing packages to npm registry 🧾</center></h1>
 
 ## Table Of Contents
 
@@ -254,8 +254,12 @@ const invalidUser: User = {
 \*\* So this is a way to do create your own package but we can all do this using mono repos as it will handle all the tedious task.
 
 - Mono repos
+
   - npm workspaces
   - Lerna
   - Turborepo (popular)
+
+  - Install turborepo and run npm run dev
+  - in the package.json you can see "ui":"\*" to import from the ui
 
 **[⬆ Back to Top](#table-of-contents)**

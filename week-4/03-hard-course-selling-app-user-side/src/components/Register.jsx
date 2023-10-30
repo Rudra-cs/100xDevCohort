@@ -16,7 +16,7 @@ function Register() {
 
     try {
       const response = axios.post(
-        "http://localhost:3000/user/signup",
+        "http://localhost:3000/admin/signup",
         credentials
       );
 
@@ -38,10 +38,10 @@ function Register() {
     <div>
       <h1>Register to the website</h1>
       <br />
-      Email/username
+      Email/username-{" "}
       <input type={"text"} onChange={(e) => setEmail(e.target.value)} />
       <br />
-      Password
+      Password -{" "}
       <input type={"password"} onChange={(e) => setPassword(e.target.value)} />
       <br />
       <button
