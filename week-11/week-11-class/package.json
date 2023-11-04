@@ -7,13 +7,14 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "eslint": "^8.48.0",
-    "prettier": "^3.0.3",
-    "tsconfig": "*",
+    "@turbo/gen": "^1.9.7",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "*",
+    "prettier": "^2.5.1",
     "turbo": "latest"
   },
   "name": "week-11-class",
-  "packageManager": "npm@9.3.1",
+  "packageManager": "npm@7.24.2",
   "workspaces": [
     "apps/*",
     "packages/*"
