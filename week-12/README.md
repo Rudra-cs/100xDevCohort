@@ -85,3 +85,6 @@ DefaultService.getTodo("asd"); // This is how you can make api call without havi
 - Hands on learning of React + next.js
 
 Building Youtube in React from scratch using tailwind css
+
+- End to end mono repos in React,express and next
+  - Deploying mono repos using Github CI/CD
