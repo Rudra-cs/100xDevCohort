@@ -2,39 +2,50 @@
 
 ## Table Of Contents
 
-- []()
+- [tRPC](#trpc)
+  - [Why tRPC](#why-trpc)
+  - [Why TRPC for us?](#why-trpc-for-us)
+  - [How does it do it?](#how-does-it-do-it)
+  - [What is RPC? What mindset should I adopt?](#what-is-rpc-what-mindset-should-i-adopt)
+- [Vocabulary](#vocabulary)
+- [Backend - three step process](#backend-three-step-process)
+  - [Output Validators](#output-validators)
+  - [Context and MIddlewares](#context-and-middlewares)
+    - [Context](#context)
+    - [Middlewares](#middlewares)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-- tRPC
+## tRPC
 
-  > RPC is short for "Remote Procedure Call".
+> RPC is short for "Remote Procedure Call".
 
-  - Moderate hard concept
-  - will require marination
-  - is not used everywhere, but is used in cal.com
+- Moderate hard concept
+- will require marination
+- is not used everywhere, but is used in cal.com
 
-- Why tRPC
+### Why tRPC
 
-  1. Automatic types on FE AND BE
-  2. Generic code that can be converted to
-     Express backend
-     Nextjs backend
-     ...
+1. Automatic types on FE AND BE
+2. Generic code that can be converted to
+   Express backend
+   Nextjs backend
+   ...
 
-- Why TRPC for us?
+### Why TRPC for us?
 
-  - cal.com uses it.
-  - it'll be very hard to understand their be w/o trpc
+- cal.com uses it.
+- it'll be very hard to understand their be w/o trpc
 
-- How does it do it?
+### How does it do it?
 
-  - Adapters
+- Adapters
 
-- What is RPC? What mindset should I adopt?
-  - It's just functions
-  - RPC is short for "Remote Procedure Call".
-  - It is a way of calling functions on one computer (the server) from another computer (the client). With traditional HTTP/REST APIs, you call a URL and get a response. With RPC, you call a function and get a response.
+### What is RPC? What mindset should I adopt?
+
+- It's just functions
+- RPC is short for "Remote Procedure Call".
+- It is a way of calling functions on one computer (the server) from another computer (the client). With traditional HTTP/REST APIs, you call a URL and get a response. With RPC, you call a function and get a response.
 
 ```js
 // HTTP/REST
@@ -45,8 +56,11 @@ const user = await res.json();
 const user = await api.users.getById({ id: 1 });
 ```
 
-- Vocabulary
-  - Below are some terms that are used frequently in the tRPC ecosystem. We'll be using these throughout the documentation, so it's good to get familiar with them. Most of these concepts also have their own pages in the documentation.
+**[⬆ Back to Top](#table-of-contents)**
+
+## Vocabulary
+
+- Below are some terms that are used frequently in the tRPC ecosystem. We'll be using these throughout the documentation, so it's good to get familiar with them. Most of these concepts also have their own pages in the documentation.
 
 | Term         | Description                                                                                                  |
 | ------------ | ------------------------------------------------------------------------------------------------------------ |
@@ -63,23 +77,27 @@ const user = await api.users.getById({ id: 1 });
 
 - LEt's create a basic TODO server and client
 
-Backend - three step process
+**[⬆ Back to Top](#table-of-contents)**
+
+## Backend - three step process
 
 1. init trpc
 2. Define your router
 3. use the adapter to serve the api
 
-- Output Validators
+### Output Validators
 
-- Context and MIddlewares
+### Context and MIddlewares
 
-  - Context
+#### Context
 
     > Your context holds data that all of your tRPC procedures will have access to, and is a great place to put things like database connections or authentication information.Setting up the context is done in 2 steps, defining the type during initialization and then creating the runtime context for each request.
 
     - Why would you put auth data and userid in context?
       Because it will be useful during accessing the auth data.
 
-- Middlewares
+#### Middlewares
 
 > You are able to add middleware(s) to a procedure with the t.procedure.use() method. The middleware(s) will wrap the invocation of the procedure and must pass through its return value.
+
+**[⬆ Back to Top](#table-of-contents)**

@@ -2,58 +2,71 @@
 
 ## Table Of Contents
 
-- []()
+- [Types of DBs](#types-of-dbs)
+- [SQL databases Relationships](#sql-databases-relationships)
+  - [**Connecting to Postgres**](#connecting-to-postgres)
+  - [Basic types of queries](#basic-types-of-queries)
+    - [Create tables](#create-tables)
+    - [Inserts](#inserts)
+    - [Gets](#gets)
+    - [Updates](#updates)
+    - [Deletes](#deletes)
+    - [Drop](#drop)
+  - [Advanced](#advanced)
+    - [Types of joins](#types-of-joins)
+  - [Indexes](#indexes)
+  - [Problems ?](#problems-)
+- [Automated Migrations?](#automated-migrations)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-- SQL databases
-- Prisma ORM
+## Types of DBs
 
-- Types of DBs
+1. **SQL**
 
-  1. SQL
+   - Strict schemas
+   - Very hard to change schemas, involve migrations
 
-     - Strict schemas
-     - Very hard to change schemas, involve migrations
+   - eg. users table
+     first_name | last_name | \_id | password
+     address table
+     user_id | address | city | state | country
 
-     - eg. users table
-       first_name | last_name | \_id | password
-       address table
-       user_id | address | city | state | country
+2. **NoSQL**
 
-  2. NoSQL
+   - Schemaless
+   - Faster to produce apps
 
-     - Schemaless
-     - Faster to produce apps
+   - eg.
+     \_id: Object("kbjkj2213213213131231")
+     username: "rudra"
+     password: "123456"
+     address: Object
+     address1: "232 plot no."
+     City: "BBSR"
+     State: "Odisha"
+     Country: "India"
 
-     - eg.
-       \_id: Object("kbjkj2213213213131231")
-       username: "rudra"
-       password: "123456"
-       address: Object
-       address1: "232 plot no."
-       City: "BBSR"
-       State: "Odisha"
-       Country: "India"
+**[⬆ Back to Top](#table-of-contents)**
 
-- SQL databases Relationships
+## SQL databases Relationships
 
-- Connecting to Postgres
+### **Connecting to Postgres**
 
-  - Username,password,URL
-  - Databases
-  - Tables
-  - postgres://[username]:[password]@[host]/[database_name]
-  - ElephantSQL free 20mb of data
+- Username,password,URL
+- Databases
+- Tables
+- postgres://[username]:[password]@[host]/[database_name]
+- ElephantSQL free 20mb of data
 
-- Basic types of queries
+### Basic types of queries
 
-  1. insert
-  2. Update
-  3. Delete
-  4. Get
+1. insert
+2. Update
+3. Delete
+4. Get
 
-- Create tables
+#### Create tables
 
 ```sql
 CREATE TABLE users(
@@ -64,10 +77,10 @@ CREATE TABLE users(
 ```
 
 - Things to learn
-  1. SERIAL PRIMARY KEY
-  2. VARCHAR(255)
-  3. UNIQUE
-  4. NOTNULL
+  1. **SERIAL PRIMARY KEY**
+  2. **VARCHAR(255)**
+  3. **UNIQUE**
+  4. **NOTNULL**
 
 Another Example: -
 
@@ -83,66 +96,68 @@ CREATE TABLE todos(
 
 - Things to learn
 
-  1. REFERENCES
-  2. DEFAULT
+  1. **REFERENCES**
+  2. **DEFAULT**
 
-- Inserts
+#### Inserts
 
 ```sql
 INSERT INTO todos (title,description, user_id,done)
 VALUES ('Buy groceries', "Milk, bread, and eggs",1, FALSE);
 ```
 
-- Gets
+#### Gets
 
 ```sql
 SELECT * FROM todos WHERE user_id = desired_user_id;
 ```
 
-- Updates
+#### Updates
 
 ```sql
 UPDATE todos SET done = TRUE WHERE id = 1;
 ```
 
-- Deletes
+#### Deletes
 
 ```sql
 DELETE FROM todos WHERE id = specific_todo_id;
 ```
 
-- Drop
+#### Drop
 
 ```sql
 DROP TABLE IF EXISTS todos;
 ```
 
-- Advanced
+### Advanced
 
-  - Foreign Keys
-  - Joins (types of join)
-  - Indexes
+- Foreign Keys
+- Joins (types of join)
+- Indexes
 
-- types of joins
+#### Types of joins
 
-  - FULL JOIN-> Should be present in either tables
-  - INNER JOIN-> Should be present in both the tables
-  - LEFT JOIN-> Should have all entries from left table
-  - RIGHT JOIN-> Should have all entries from right table
+- **FULL JOIN**-> Should be present in either tables
+- **INNER JOIN**-> Should be present in both the tables
+- **LEFT JOIN**-> Should have all entries from left table
+- **RIGHT JOIN**-> Should have all entries from right table
 
 - By default if you write JOIN it is default taken as INNER JOIN
 
-- Indexes
+**[⬆ Back to Top](#table-of-contents)**
 
-  1. MAke query on a certain column faster
-  2. In our case we can add an index like below
-  3. Since we're uisng Postgres, it doesn't matter since the foreign key relation creates an index by default
+### Indexes
 
-  ```sql
-  CREATE INDEX idx_todo_user_id ON todos(user_id);
-  ```
+1. MAke query on a certain column faster
+2. In our case we can add an index like below
+3. Since we're uisng Postgres, it doesn't matter since the foreign key relation creates an index by default
 
-Problems ?
+```sql
+CREATE INDEX idx_todo_user_id ON todos(user_id);
+```
+
+### Problems ?
 
 - You have to write raw sql queries
 - Migrations are hard
@@ -160,11 +175,13 @@ Solution - ORMs
   - Prisma Migrate:- Migration tool to easily evolve your database schema from prototyping to production
   - Prisma Studio:- GUI to view and edit data in your database.
 
-- Automated Migrations?
+  **[⬆ Back to Top](#table-of-contents)**
 
-  > Db changes often, you add more columns, add new tables, you have to do MIGRATIONS to keep syncing the DB state.
-  > Pre-ORM days - Manually update the prod DB, dev DB
-  > There was no log of the changes made to the DB
+## Automated Migrations?
+
+> Db changes often, you add more columns, add new tables, you have to do MIGRATIONS to keep syncing the DB state.
+> Pre-ORM days - Manually update the prod DB, dev DB
+> There was no log of the changes made to the DB
 
 - 3 steps
   1. Intialize prisma
@@ -179,3 +196,5 @@ Things to learn
 - @relation(fields: [authorId],references:[id])
 
 - Learn more about indexing
+
+**[⬆ Back to Top](#table-of-contents)**

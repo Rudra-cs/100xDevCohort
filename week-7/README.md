@@ -122,12 +122,26 @@ let age: number = 30;
 interface Person {
   name: string;
   age: number;
+  readonly id: string;
 }
+
+// Here the readonly states that you cannot change the id
+
+// Array
+const arr2: Array<string | number> = [
+  "Rudra",
+  123,
+  "Behera",
+  123,
+  3123,
+  "Hello",
+];
 
 // Type inference
 const person: Person = {
   name: "Alice",
   age: 25,
+  id: "assdsa"
 };
 
 // Type checking
@@ -383,6 +397,175 @@ let todayString: string = DayOfWeek[today];
 
 console.log(`Today is ${todayString}.`); // "Today is Wednesday."
 
+```
+
+```ts
+// Type Assertion
+const btn = document.getElementById("btn") as HTMLElement;
+// OR
+const btn = <HTMLElement>document.getElementById("btn");
+// OR
+const btn = document.getElementById("btn")!;
+
+// ! this signifies that the element is not null
+```
+
+```ts
+// Type Utility
+
+// Partial<Type>
+type User = {
+  name: string;
+  email: string;
+};
+
+type User2 = Partial<User>;
+
+// Required<Type> - opposite of Partial
+type User = {
+  name?: string;
+  email: string;
+};
+
+type User2 = Required<User>;
+
+// Readonly<Type>
+interface Person {
+  name: string;
+  age: number;
+}
+
+const readOnlyPerson: Readonly<Person> = {
+  name: "John",
+  age: 25,
+};
+
+// The following line would cause a compilation error
+// readOnlyPerson.name = 'Alice';
+
+// Record<Keys,Type>
+type PersonKeys = "name" | "age" | "city";
+
+const personRecord: Record<PersonKeys, string> = {
+  name: "John",
+  age: "25",
+  city: "New York",
+};
+
+// Pick<Keys,Type>
+interface Person {
+  name: string;
+  age: number;
+  city: string;
+}
+
+type PersonInfo = Pick<Person, "name" | "age">;
+
+const personInfo: PersonInfo = {
+  name: "John",
+  age: 25,
+};
+
+// Omit<Keys,Type>
+interface Person {
+  name: string;
+  age: number;
+  city: string;
+}
+
+type PersonWithoutCity = Omit<Person, "city">;
+
+const personWithoutCity: PersonWithoutCity = {
+  name: "John",
+  age: 25,
+};
+
+// Exclude<Type,ExcludedUnion>
+type Numbers = 1 | 2 | 3 | 4 | 5;
+type OddNumbers = Exclude<Numbers, 2 | 4>;
+
+// Result: OddNumbers is 1 | 3 | 5
+
+// Extract<Type,Union>
+type Numbers = 1 | 2 | 3 | 4 | 5;
+type EvenNumbers = Extract<Numbers, 2 | 4>;
+
+// Result: EvenNumbers is 2 | 4
+```
+
+#### Generics
+
+```ts
+function swap<T>(a: T, b: T): void {
+  const temp: T = a;
+  a = b;
+  b = temp;
+}
+
+let a = 5;
+let b = "hello";
+
+swap<number>(a, b); // Compilation error: Type 'string' is not assignable to type 'number'
+
+// Fix the types
+let c = 5;
+let d = 10;
+
+swap<number>(c, d);
+
+console.log(c); // Output: 10
+console.log(d); // Output: 5
+```
+
+```ts
+const func = <T, U>(n: T, o: U): { n: T; o: U } => {
+  return { n, o };
+};
+
+const ans = func<number, string>(20, "lol");
+
+// Another example
+const func = <T, U extends T>(n: T, o: U): { n: T; o: U } => {
+  return { n, o };
+};
+
+const ans = func<number, number>(20, "lol");
+```
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+};
+
+const users: Person[] = [
+  {
+    name: "Rudra",
+    age: 24,
+  },
+  {
+    name: "saanvi",
+    age: 22,
+  },
+  {
+    name: "pikachu",
+    age: 14,
+  },
+  {
+    name: "omen",
+    age: 44,
+  },
+];
+const filterByPeoples = <T, U extends keyof T>(
+  arr: T[],
+  property: U,
+  value: T[U]
+): T[] => {
+  return arr.filter((item) => item[property] === value);
+};
+
+const filteredPeopleByName = filterByPeoples(users, "name", "Rudra");
+const filteredPeopleByAge = filterByPeoples(users, "age", 44);
 ```
 
 **[⬆ Back to Top](#table-of-contents)**

@@ -2,20 +2,25 @@
 
 ## Table Of Contents
 
-- []()
+- [Open API Specification](#open-api-specification)
+  - [What is an Open API?](#what-is-an-open-api)
+- [CLasses in TS](#classes-in-ts)
+  - [Decorators](#decorators)
+- [Building Youtube in React from scratch using tailwind css](#building-youtube-in-react-from-scratch-using-tailwind-css)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-- Open API Specification
+## Open API Specification
 
-  - End goals
-    1. Create chatgpt plugin
-    2. Create clients
-    3. Zerodha bug
+- End goals
 
-- What is an Open API?
+  1. Create chatgpt plugin
+  2. Create clients
+  3. Zerodha bug
 
-  > The OpenAPI Specification (OAS) is a framework used by developers to build applications that interact with REST APIs. The specification defines how to communicate with an API, what information can be requested, and what information can be returned. With OpenAPI, developers can ensure their APIs are consistent with the industry standards and can easily integrate their applications with other services.
+### What is an Open API?
+
+> The OpenAPI Specification (OAS) is a framework used by developers to build applications that interact with REST APIs. The specification defines how to communicate with an API, what information can be requested, and what information can be returned. With OpenAPI, developers can ensure their APIs are consistent with the industry standards and can easily integrate their applications with other services.
 
 - An OpenAPI file describes an API in its entirety, including:
 
@@ -37,13 +42,16 @@
   9. Benefit from a widely supported standard.
   10. Automatically generate API documentation.
 
-- CLasses in TS
+  **[⬆ Back to Top](#table-of-contents)**
 
-  - Lets create a Date class
-  - Decorators
+## CLasses in TS
 
-- Decorators in TypeScript are a feature that allow you to add metadata or behavior to class declarations, methods, and properties. They are a way to annotate and modify the behavior of classes and their members during the compile-time phase. Decorators are applied using the @ symbol followed by a function or an expression.
-  `https://github.com/NetanelBasal/helpful-decorators` go to this file for reference
+- Lets create a Date class
+
+### Decorators
+
+> Decorators in TypeScript are a feature that allow you to add metadata or behavior to class declarations, methods, and properties. They are a way to annotate and modify the behavior of classes and their members during the compile-time phase. Decorators are applied using the @ symbol followed by a function or an expression.
+> `https://github.com/NetanelBasal/helpful-decorators` go to this file for reference
 
 - Lets create a todo app with the
   Open API Spec
@@ -58,15 +66,16 @@
 Follow this repo `https://github.com/lukeautry/tsoa`
 
 So, the main purpose of creating an openapi Spec is if ever you change the url endpoints which are connected to any devices need to always change so fo that we use openapi client.
+
 The main purpose of creating an OpenAPI specification is to have a standardized and documented contract for your API. This contract includes the details of your API's endpoints, request and response formats, and how to interact with your API.
 
 When you have an OpenAPI specification, it serves as a common agreement between the API provider and consumers. If you make changes to your API, the specification helps ensure that everyone is on the same page. This is valuable because:
 
-Consistency: Changes to API endpoints or data structures are documented in the specification, so all parties know what to expect.
+- Consistency: Changes to API endpoints or data structures are documented in the specification, so all parties know what to expect.
 
-Communication: It facilitates communication between teams working on different parts of the system or third-party developers integrating with your API.
+- Communication: It facilitates communication between teams working on different parts of the system or third-party developers integrating with your API.
 
-Code Generation: You can generate client SDKs based on the specification, making it easier for consumers to interact with your API.
+- Code Generation: You can generate client SDKs based on the specification, making it easier for consumers to interact with your API.
 
 In essence, the OpenAPI specification helps keep everyone in sync, reduces errors, and eases the process of making and consuming API changes.
 
@@ -84,7 +93,9 @@ DefaultService.getTodo("asd"); // This is how you can make api call without havi
 
 - Hands on learning of React + next.js
 
-Building Youtube in React from scratch using tailwind css
+## Building Youtube in React from scratch using tailwind css
 
 - End to end mono repos in React,express and next
   - Deploying mono repos using Github CI/CD
+
+**[⬆ Back to Top](#table-of-contents)**

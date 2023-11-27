@@ -2,21 +2,31 @@
 
 ## Table Of Contents
 
-- Array notation
-  TS can infer return types
+- [Array notation](#array-notation)
+- [Generics](#generics)
+- [Partials in TS](#partials-in-ts)
+- [Why we need backend validation?](#why-we-need-backend-validation)
+  - [Zod validation](#zod-validation)
+- [Zod inference](#zod-inference)
 
-  ```js
-  type NumberArr = number[];
+**[⬆ Back to Top](#table-of-contents)**
 
-  function getFirstItem(arr: NumberArr): number {
-    return arr[0];
-  }
+### Array notation
 
-  let a = getFirstItem([1, 2, 3]);
-  console.log(a);
-  ```
+- TS can infer return types
 
-  So for second one the array can have numbers as input or string as input then write the function
+```js
+type NumberArr = number[];
+
+function getFirstItem(arr: NumberArr): number {
+  return arr[0];
+}
+
+let a = getFirstItem([1, 2, 3]);
+console.log(a);
+```
+
+So for second one the array can have numbers as input or string as input then write the function
 
 ```ts
 type Arr = (number | string)[];
@@ -34,7 +44,7 @@ b.toLowerCase();
 // Ts compiler will show a error that the lowercase func does support it as it can either be a string or number even if we know that it is a string so we introduce generics.
 ```
 
-- Generics
+### Generics
 
 > Generics refer to a programming concept that allows the creation of classes, interfaces or methods that can work with different types while maintaining the type safety. In other words generics provide a way to write reusable code that can operate on various data types without sacrifiing type checking at compile time.
 
@@ -75,8 +85,9 @@ b.toLowerCase();
   const [s, t] = swap(1, "2"); // Array destructing
   ```
 
-- Partials in TS
-  - Make all attributes optional
+### Partials in TS
+
+- Make all attributes optional
 
 ```ts
 // Define a interface representing a person with required properties
@@ -101,12 +112,12 @@ const completePerson: PartialPerson = {
 };
 ```
 
-- Why we need backend validation?
+### Why we need backend validation?
 
-  - Erroneous inputs can cause error
-  - Try to break the todo app in week 8 repo by sending vague email long email sending an objet in username
+- Erroneous inputs can cause error
+- Try to break the todo app in week 8 repo by sending vague email long email sending an objet in username
 
-  Zod validation
+#### Zod validation
 
 - When your server is running and a user sends incorrect inputs or the server crashes for some reason, you want it to keep running and handle such issues gracefully. To achieve this, you can use a process manager like "pm2" (preferred) or "forever."
 
@@ -182,10 +193,45 @@ mySchema.safeParse(12); // => { success: false; error: ZodError }
 
 - Custom fetch hook
 
+```js
+import { useState, useEffect } from "react";
+
+const useFetch = (url) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
+};
+
+export default useFetch;
+```
+
 - Create yourr own packages
 
   - And how to re-use packages
   - What are monorepos
+    > A monorepo, short for "monolithic repository," is a version control repository that contains multiple projects, applications, or services. Instead of having separate repositories for each project, all related code is stored in a single repository. This approach is often used in large-scale software development to manage multiple interdependent projects more efficiently.
 
 - Why packages/modules?
 
@@ -193,7 +239,7 @@ mySchema.safeParse(12); // => { success: false; error: ZodError }
   - Separation of concern
   - Teams can work on modules independently
 
-- Zod inference
+### Zod inference
 
 > In Zod, type inference is a feature that allows you to automatically derive TypeScript types from your Zod schema definitions. This means that you can use Zod to define the shape and validation rules for your data, and Zod will generate TypeScript types based on those definitions. This helps you ensure type safety and consistency in your code.
 

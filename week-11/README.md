@@ -2,15 +2,18 @@
 
 ## Table Of Contents
 
-- []()
+- [Mono Repo](#mono-repo)
+  - [Key characteristics and benefits of a monorepo include:](#key-characteristics-and-benefits-of-a-monorepo-include)
+  - [Steps to follow](#steps-to-follow)
+- [Auth using next-auth](#auth-using-next-auth)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-### Mono Repo
+## Mono Repo
 
 > _A monorepo (short for "monolithic repository") is a software development and version control strategy where multiple projects or components of a software system are stored in a single, centralized repository. In a monorepo, all related code, libraries, and dependencies are managed together in a single version control system (e.g., Git)._ This is in contrast to a multi-repository approach where each project or component has its own separate repository.
 
-Key characteristics and benefits of a monorepo include:
+### Key characteristics and benefits of a monorepo include:
 
 1. Code Sharing: In a monorepo, code sharing is simplified because all components or projects are in one repository. This can promote code reuse and consistency across different parts of the system.
 
@@ -35,26 +38,26 @@ Key characteristics and benefits of a monorepo include:
 - Marination
 - Building an end to end mono repo in NextJS + TS
 
-- Steps to follow
+### Steps to follow
 
-  - Init a turbo mono repo(npx create-turbo@latest )
-  - add a nextjs app with the page route in TS
-  - Update next.config.js to use ui as an internal package(transpilePackages) and update the dependencies as `"ui": "*"`
-  - Export right set of commponents from ui (check the index.tsx file in ui and the index.tsx file in components)
-  - Install mui(react dependency will complain) -- an opportunity for an open source contribution
-  - Put a simple signup/signin component (npm i from top)
-  - Start adding backend, create a new db module(internal?)package
-    for this create a separate package db and add `"main": "src/index.ts",
+- Init a turbo mono repo(npx create-turbo@latest )
+- add a nextjs app with the page route in TS
+- Update next.config.js to use ui as an internal package(transpilePackages) and update the dependencies as `"ui": "*"`
+- Export right set of commponents from ui (check the index.tsx file in ui and the index.tsx file in components)
+- Install mui(react dependency will complain) -- an opportunity for an open source contribution
+- Put a simple signup/signin component (npm i from top)
+- Start adding backend, create a new db module(internal?)package
+  for this create a separate package db and add `"main": "src/index.ts",
 "types": "src/index.ts",` in the package.json
-  - Where should db.connect be? Cache it in a file of its own
+- Where should db.connect be? Cache it in a file of its own
 
-  create a dir in src called lib and have a file
+create a dir in src called lib and have a file
 
-  - Connect frontend to backend(notice no cors?)
-  - Introduce store as a new module, transpile it
-  - Introduce components folder for appbar
+- Connect frontend to backend(notice no cors?)
+- Introduce store as a new module, transpile it
+- Introduce components folder for appbar
 
-### Auth using next-auth
+## Auth using next-auth
 
 - env var
 - oauth
